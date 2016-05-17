@@ -3,7 +3,8 @@
 ### Technologies
 
 - [React](https://facebook.github.io/react/)
-- [Redux](http://rackt.github.io/redux)
+- [Redux](http://rackt.github.io/redux/)
+- [React Router](https://github.com/reactjs/react-router/)
 
 ### Tools
 
