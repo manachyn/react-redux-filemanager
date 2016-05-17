@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react';
 
 export default class FilesystemsList extends Component {
     render() {
@@ -8,10 +8,10 @@ export default class FilesystemsList extends Component {
                     <TodoItem key={filesystem.name} filesystem={filesystem} />
                 )}
             </ul>
-        )
+        );
     }
 }
 
 FilesystemsList.propTypes = {
     filesystems: PropTypes.array.isRequired
-}
+};

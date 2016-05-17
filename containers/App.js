@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { pushState } from 'redux-router';
+import { push } from 'react-router-redux';
+import Filemanager from '../components/Filemanager';
 import { resetErrorMessage } from '../actions';
 
 class App extends Component {
@@ -16,7 +17,7 @@ class App extends Component {
   }
 
   handleChange(nextValue) {
-    this.props.pushState(null, `/${nextValue}`);
+    this.props.push(`/${nextValue}`);
   }
 
   renderErrorMessage() {
@@ -26,27 +27,27 @@ class App extends Component {
     }
 
     return (
-        <p style={{ backgroundColor: '#e99', padding: 10 }}>
-          <b>{errorMessage}</b>
-          {' '}
-          (<a href="#"
-              onClick={this.handleDismissClick}>
+      <p style={{ backgroundColor: '#e99', padding: 10 }}>
+        <b>{errorMessage}</b>
+        {' '}
+        (<a href="#"
+            onClick={this.handleDismissClick}>
           Dismiss
         </a>)
-        </p>
+      </p>
     );
   }
 
   render() {
-    //const { children, inputValue } = this.props;
-    const { children } = this.props;
+    const { children, path } = this.props;
     return (
-        <div>
-          Hello
-          <hr />
-          {this.renderErrorMessage()}
-          {children}
-        </div>
+      <div>
+        <Filemanager path={path}
+                 onChange={this.handleChange} />
+        <hr />
+        {this.renderErrorMessage()}
+        {children}
+      </div>
     );
   }
 }
@@ -55,8 +56,8 @@ App.propTypes = {
   // Injected by React Redux
   errorMessage: PropTypes.string,
   resetErrorMessage: PropTypes.func.isRequired,
-  pushState: PropTypes.func.isRequired,
-  inputValue: PropTypes.string.isRequired,
+  push: PropTypes.func.isRequired,
+  path: PropTypes.string.isRequired,
   // Injected by React Router
   children: PropTypes.node
 };
@@ -64,11 +65,11 @@ App.propTypes = {
 function mapStateToProps(state) {
   return {
     errorMessage: state.errorMessage,
-    inputValue: state.router.location.pathname.substring(1)
+    path: state.routing.location.pathname.substring(1)
   };
 }
 
 export default connect(mapStateToProps, {
   resetErrorMessage,
-  pushState
+  push
 })(App);

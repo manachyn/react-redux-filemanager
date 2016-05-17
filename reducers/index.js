@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { routerStateReducer as router } from 'redux-router';
+import { routeReducer } from 'react-router-redux';
 import {
     FETCH_OBJECTS_REQUEST, FETCH_OBJECTS_SUCCESS, FETCH_OBJECTS_FAILURE, SELECT_PATH
 } from '../actions';
@@ -48,7 +48,7 @@ function objectsByPath(state = {}, action) {
 const rootReducer = combineReducers({
     objectsByPath,
     selectedPath,
-    router
+    routing: routeReducer
 });
 
 export default rootReducer;
